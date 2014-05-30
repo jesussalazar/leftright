@@ -545,6 +545,8 @@ var canvasCtx = canvasInput.getContext('2d');
 canvasCtx.strokeStyle = "#000";
 canvasCtx.lineWidth = 2;
 
+var img = document.getElementById('nave');
+
 var drawIdent = function(cContext,x,y) {
 	/* Aqui se debe dibujar la nave o el carrito */
 	// normalise values
@@ -557,7 +559,7 @@ var drawIdent = function(cContext,x,y) {
 	// clean canvas
 	cContext.clearRect(0,0,canvasInput.width,canvasInput.height);
 
-	// draw rectangle around canvas
+	/* draw rectangle around canvas
 	cContext.strokeRect(0,0,canvasInput.width,canvasInput.height);
 
 	//draw marker, from x,y position
@@ -571,7 +573,9 @@ var drawIdent = function(cContext,x,y) {
 	cContext.moveTo(x,y-5);
 	cContext.lineTo(x,y+5);
 	cContext.closePath();
-	cContext.stroke();
+	cContext.stroke();*/
+	// Imagen, X, Y, ANCHO, ALTO
+	cContext.drawImage(img,x,y,20,20);
 };
 
 document.addEventListener("facetrackingEvent", function(e) {
