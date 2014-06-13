@@ -1,22 +1,22 @@
-﻿@font-face {
+﻿/*Left-Right*/
+/*Aqui cambiamos los tipos de fuente de las letras del juego*/
+@font-face {
   font-family: 'Erix';
   font-style: normal;
   font-weight: normal;
   src: url('./erix_outline.ttf');
-} /* Erix Outline font by Patrick H. Lauke http://www.splintered.co.uk/experiments/72/ */
+}
 
+/*Aqui cambiamos el color de fondo de la pantalla inicial*/
 body {
-	background-color: #1E90FF;
-	background-image: url("fondoo.png");
-	background-size:100% 100%;
-	background-repeat:no-repeat;
+	background-color: #000000;
 	margin: 0px;
 	overflow: hidden;
 	cursor:default;
 }
 
 a {
-	color:#00FF00;
+	color:#0078ff;
 }
 
 .hud {
@@ -34,9 +34,9 @@ a {
 	margin: 0;
 	padding: 0;
 	top:50%;
-	left:35%;
+	left:0;
 }
-
+/*Estilo de los botones*/
 .but {
 	color:white;
 	font-family: 'Erix', serif;
@@ -49,81 +49,123 @@ a {
 	padding: 0.5em;
 	margin: 0 auto;
 	width: 8em;
-	/* initial start button style */
+	/* Estilo inicial del boton Iniciar */
 	display: none;
 }
-
+/*Color el boton cuando el mouse pasa por encima*/
+/*Boton Inicio*/
 .but:hover {
-	background-color: #191970;
+	background-color: #DAA520;
 }
-
+/*Posicion de los puntos en la pantalla de juego*/
 #score {
-	top:10px;
-	right:20px;
+	top:65%;
+	left:10pxs;
 }
-
+/*Posicion de los puntos en la pantalla de juego*/
 #lives {
-	top:35%;
-	left:10px;
-	font-size:100%;
-	color: white;
+	//position: relative;
+	top:30%;
+	right:10px;
+	font-size:200%;
+	color: #ffffff;
+	white-space: pre;
 }
-
+/*Posicion del mayor puntaje en la pantalla de inicio*/
+/*Muesta el mayor puntaje de la partida anterior*/
 #hiscore {
 	position:absolute;
 	z-index:999;
-	top: 50%;
-	left:10px;
+	top:35%;
+	right:60px;
 	width:100%;
 	margin:0;
-	text-align:left;
+	text-align:right;
 	font-size:90%;
 	line-height:100%;
 }			
-
+/*Posicion de la informacion que sale en la parte inferior*/
 #info {
 	position:absolute;
 	z-index:999;
-	/*bottom:75px;*/
-	top: 05px;
-	left:10px;
+	bottom:75px;
+	top: 0px;
+	right:0.5%;
 	width:20em;
-	margin-left:0em;
-	text-align:left;
-	font-size:60%;
-	/*line-height: 1.2;*/
+	margin-left:-10em;
+	text-align:right;
+	font-size:65%;
+	line-height: 2;
 }
 
 small {
 	font-size:70%;
 }
-
+/*Posicion y atributos del titulo en la pantalla de inicio*/
 #title {
 	position:absolute;
 	z-index:999;
 	top:0%;
-	left:0;
+	left:20px;
 	width:100%;
 	text-align:center;
 	font-size: 200%;
 }
-
+/*Posicion y atributos de los creditos de la pantalla de inicio*/
+/*Parte inferior*/
 #credit {
 	font-family: 'Erix', serif;
 	position:absolute;
 	bottom:1em;
-	width: 100%;
+	width: 80%;
 	text-align:center;
 	font-size:30%;
 	color:#aaa;
 }
-
-#credit a { color: #f00; }
-
+/*Posicion y atributos del infdicador distancia y niveles*/
+#puntos {
+	font-family: 'Erix', serif;
+	position:absolute;
+	bottom:1em;
+	top: 55%;
+	left: 10px;
+	width: 80%;
+	text-align:left;
+	tex
+	font-size:100%;
+	color:#ffffff;
+}
+/*Posicion y atributos del infdicador distancia y niveles*/
+#nivel {
+	font-family: 'Erix', serif;
+	position:absolute;
+	bottom:1em;
+	top: 0%;
+	left: 10px;
+	width: 80%;
+	text-align:left;
+	font-size:100%;
+	color:#ffffff;
+}
+#niveles {
+	font-family: 'Erix', serif;
+	position:absolute;
+	bottom:1em;
+	top: 7%;
+	left: 20px;
+	width: 80%;
+	text-align:left;
+	font-size:100%;
+	color:#ffffff;
+}
+/*Color de los creditos (de algunas letras)*/
+#credit a { color: #000000; }
+/*Posicion de la camara en general 
+(sin recuadro que lo siga)*/
 video {
 	position:absolute;
-	top: 35px;
-	left: 10px;
+	top: 50px;
+	right: 20px;
 	z-index:1000;
 	display:block;
 	width: 200px; height: 150px;
@@ -133,7 +175,8 @@ video {
 	-ms-transform: scaleX(-1);
 	transform : scaleX(-1);
 }
-
+/*Coloca la transparencia gris sobre una imagen
+(sobre la camara)*/
 .grayout .but {
   filter:alpha(opacity=40); /* IE */
   opacity: 0.4; /* Safari, Opera */

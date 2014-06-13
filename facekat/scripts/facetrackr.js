@@ -1,4 +1,4 @@
- /**
+/**
  * Library for detecting and tracking the position of a face in a canvas object
  *
  * usage:

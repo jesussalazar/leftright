@@ -14,5 +14,3 @@ if (window.opera && navigator.getUserMedia) {
     window.URL = window.URL || {};
     if (!window.URL.createObjectURL) window.URL.createObjectURL = function(obj) {return obj;};
 }
-
-/*AQUI CREO QUE SE MANEJA EL ESPACIO*/

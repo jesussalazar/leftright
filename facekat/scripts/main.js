@@ -1,5 +1,4 @@
-﻿// Based on FastKat by Andrea Doimo http://www.omiod.com/games/fastkat.php
-// Further modified by Audun Mathias Øygard and Patrick H. Lauke
+﻿/*Left-Right*/
 
 var STARS = 200;
 var FAR = 4000;
@@ -15,10 +14,12 @@ var nextFrame;
 var nextP;
 var hiscore;
 var maxSpeed;
+var niveles=1; //nuevo elemento
+
 
 var cr,cg,cb;
 
-var options = {"opt_invincible":0 , "opt_swirlonly":0 }; // For debugging purposes
+var options = {"opt_invincible":1 , "opt_swirlonly":0 }; // For debugging purposes MODO DE PRUEBA
 
 var lives;
 var collision;
@@ -47,6 +48,7 @@ var bdy = document.getElementById("body");
 
 var animType;
 
+
 function handleKey(event) {
 	if (event.keyCode == 27) {
 		
@@ -57,10 +59,11 @@ function handleKey(event) {
 		if (event.stopPropagation) event.stopPropagation();				
 	}
 	
-	// brake with spacebar
+	/*Frenar con la barra espaciadora durante el juego*/
 	if (event.keyCode == 32) {
 		event.preventDefault();
-		speed = speed *0.75;
+		speed = 0;
+		score=score-1;
 	}
 }			
 
@@ -78,6 +81,7 @@ init();
 
 reset();
 titleScreen();
+//start();
 
 function html(id,txt) {
 	var o = document.getElementById(id);
@@ -95,19 +99,21 @@ function hide(id) {
 }
 
 
-// shows titlescreen
+/*Aqui estan las propiedades de todo lo que se muestra
+en la pantalla de inicio */
 function titleScreen() {
 	hiscore = localStorage.getItem("hiscore");
 	if ( hiscore == 0 || hiscore == undefined || hiscore == null ) hiscore = 0;
 	
-	html("hiscore","Ultimo Puntaje<br>"+hiscore);
+	html("hiscore","hi-score<br>"+hiscore);
 	show("start");
-	show("hiscore");
+	hide("hiscore");
 	show("title");
 	show("info");
 	show("lives");
-	show("credit");
-	show("atras");
+	hide("credit");
+	hide("puntos");
+	hide("nivel");
 
 	if (interval != undefined) interval=window.clearInterval(interval);
 	if (hintsTimer != undefined) hintsTimer=window.clearInterval(hintsTimer);
@@ -126,44 +132,55 @@ function animate() {
 	demo();
   }
   
-  requestAnimationFrame( animate );
+  requestAnimationFrame( animate );//Si quito esta linea elimino todas las animaciones
 }
-
+/*Aqui estan las propiedades de todo lo que se muestra
+en la pantalla de juego */
 function start() {
 	hide("start");
 	hide("hiscore");
-	hide("title");
-	hide("info");
+	show("info");
 	hide("credit");
 	show("lives");
-	hide("atras");
+	hide("puntos");
+	show("nivel");
+    
+
 	
 	if (interval != undefined) interval=window.clearInterval(interval);
 	if (hintsTimer != undefined) hintsTimer=window.clearInterval(hintsTimer);
 	
 	reset();
 	updateLives();
+
+	//updateNiveles();
 	
-	maxSpeed = 10;
+	maxSpeed = 25;
 	
 	initPhase( 1 );
 	
 	animType = "loop";
 	
 }
-
+/*Aqui estan las propiedades de todo lo que se muestra
+en la pantalla del juego cuando se pierde lo que cambia
+del boton*/
 function gameOver() {
 	var startext = [];
-	startext[0] = "START";
-	startext[1] = "RETRY";
-	startext[2] = "ONCE MORE";
-	startext[3] = "AGAIN";
-	startext[4] = "RESTART";
-	bdy.style.backgroundColor = '#000';
-
+	startext[0] = "Jugar";
+	startext[1] = "Prueba Otra Vez";
+	startext[2] = "Vamos Una Vez Mas";
+	startext[3] = "De Nuevo";
+	startext[4] = "Jugar";
+	bdy.style.backgroundColor = '#000000';
+	
 	html("start",startext[ Math.floor(Math.random() * startext.length) ]);
 	
-	show("start")
+	show("start");
+	hide("score");
+	hide("niveles");
+
+
 	
 	hiscore = localStorage.getItem("hiscore");
 	if ( hiscore == 0 || hiscore == undefined || hiscore == null ) hiscore = 0;
@@ -174,6 +191,7 @@ function gameOver() {
 	}
 	
 	titleScreen();
+	show("hiscore");
 }
 
 function initPhase( ph ) {
@@ -217,13 +235,22 @@ function initPhase( ph ) {
 	
 }
 
-
+/*Aqui se escriben las vidas en la pantalla de juego*/
 function updateLives() {
 	var out = "";
-	for ( var i = 0; i<lives ; i++ ) out += "";
+	for ( var i = 0; i<lives ; i++ ) out += "❤";
 	html("lives",out);
 }
 
+function updateNiveles() {
+	var aumento=100000000000000000;
+	if (score>aumento){
+		niveles++,
+		aumentos=aumentos+100;
+	}
+}
+
+/*Aqui se resetean todos los valores al iniciar el jugo*/
 function reset() {
 	speed = 5;
 	score = 0;
@@ -231,7 +258,8 @@ function reset() {
 	nextFrame = 0;
 	nextP = 0;			
 	lives = 3;
-	collision = 0;			
+	collision = 0;	
+	niveles=1;		
 
 	for ( var i = 0; i < STARS; i ++ ) {
 		particle = particles[ i ];
@@ -241,26 +269,15 @@ function reset() {
 		particle.scale.x = particle.scale.y = 17;
 	}
 }
-			
+/*Aqui es donde se dibujan las particulas*/			
 function particleRender(context) {
-	/*context.beginPath();
-	context.quadraticCurveTo(10, 80, 40, 130);
-context.quadraticCurveTo(30, 90, 50, 130);
-context.quadraticCurveTo(50, 100, 70, 130);
-context.quadraticCurveTo(80, 110, 100, 130);
-context.quadraticCurveTo(120, 120, 140, 130);
-	//context.arc( 0, 0, 1, 0,  Math.PI * 2, true );
-	context.fillStyle = "gold";
-	context.fill();*/// Create the yellow face
-context.strokeStyle = "#000000";
-context.fillStyle = "#FFFF00";
-context.beginPath();
-context.arc(0,0,1,0,Math.PI*2,true);
-context.closePath();
-context.stroke();
-context.fill();
-
-}
+	context.strokeStyle = "#FFD700";
+	context.fillStyle = "#00008B";
+	context.beginPath();
+	context.arc(0,0,0.5,0,Math.PI*2,true);
+	context.stroke();
+	context.fill();
+};
 			
 function init() {
 	resetFont();
@@ -308,8 +325,8 @@ function loop() {
 
 	loopSpeed = speed;
 	
-	if ( speed <= 30 ) {
-		cr = cg = cb = ((speed/30)*0.7)+0.3;
+	if ( speed <= 50 ) {
+		cr = cg = cb = ((speed/30)*0.7)+0.1;
 	} else if ( speed > 30 ) {
 		cr = 1;
 		cg = (40-speed)/10;
@@ -320,7 +337,7 @@ function loop() {
 		particle = particles[ i ];
 		particle.position.z += loopSpeed;
 		
-		//var color = particles[ i ].materials[ 0 ].color;
+		//AQUI PASA ALGO//var color = particles[ i ].materials[ 0 ].color;
 		var color = particles[ i ].material.color;
 		
 			color.r = (particle.position.z / FAR ) * cr;
@@ -335,11 +352,11 @@ function loop() {
 			switch ( phase ) {
 				case 1:
 					if ( Math.random() < 0.95 ) {
-						particle.position.x = Math.random() * 3000 - 1500;
-						particle.position.y = Math.random() * 3000 - 1500;
+						particle.position.x = Math.random() * 3000 - 1000;//Aqui se crean las particulas, el radio
+						particle.position.y = Math.random() * 3000 - 1000;
 					} else {
-						particle.position.x = camera.position.x + Math.random() * 200 - 100;
-						particle.position.y = camera.position.y + Math.random() * 200 - 100;
+						particle.position.x = camera.position.x + Math.random() * 400;
+						particle.position.y = camera.position.y + Math.random() * 400;
 					}
 					break;
 					
@@ -369,7 +386,7 @@ function loop() {
 			}
 			
 		}
-
+/*AQUI SE MANEJAN LAS COLICIONES*/
 		if ( options.opt_invincible == 0 ) {
 			if ( Math.abs( particle.position.x-camera.position.x) < SAFE && Math.abs( particle.position.y-camera.position.y) < SAFE && Math.abs( particle.position.z-camera.position.z) < SAFE ) {
 				if ( collision < 0 ) {
@@ -383,15 +400,19 @@ function loop() {
 		
 	}
 	
-	speed += 0.02;
+	speed += 0.009;
 	maxSpeed = Math.min(maxSpeed + 0.008 , 150 );
 	
 	if ( speed > maxSpeed ) {
 		speed = maxSpeed;
 	}
 
-	score += (Math.round(speed/20)+1);
-					
+	score += (Math.round(speed/5000)+1);// AQUI DE ACTUALIZA EL PUNTAJE EN LA PANTALLA DE JUEGO
+	updateNiveles();
+	
+
+	drawIdent(canvasCtx, score);
+				
 	toNextPhase -= Math.floor(speed);
 	if ( toNextPhase < 0 ) {
 		initPhase( Math.floor( Math.random() * NPHASES )+1 );
@@ -402,13 +423,14 @@ function loop() {
 		tmp = Math.floor( Math.random()*collision*5);
 		bdy.style.backgroundColor = 'rgb('+tmp+','+Math.floor( tmp/2 )+',0)';
 	} else {
-		bdy.style.backgroundColor = '#1E90FF';
+		bdy.style.backgroundColor = '#000000';// AQUI CAMBIAMOS EL COLOR DEL JUEGO
 	}
 
-	html("score",score);
+	//html("score",score); //AQUI SE MUESTRA EL PUNTAJE EN LA PANTALLA DE JUEGO
+	html("niveles",niveles);//AQUI SE MUESTRAN LOS NIVELES EN LA PANTALLA DE JUAGO
 	
 	renderer.render( scene, camera );
-
+//AQUI ES DONDE SE CONFIRMA QUE PERDIO Y PASA A LA PANTALLA GAMEOVER
 	if ( collision < 0 && lives <=0 ) {
 		interval=window.clearInterval(interval);
 		gameOver();
@@ -438,7 +460,7 @@ function demo() {
 	renderer.render( scene, camera );
 
 }
-
+/*AQUI SE CAMBIAN LOS MENSAJES DE LA INFORMACION*/
 function showHints() {
 	
 	html("info",messages[messageNow]);
@@ -447,9 +469,9 @@ function showHints() {
 	if ( messageNow >= messages.length ) messageNow = 0;
 }
 
-// Audun's face tracking magic...
+//SEGUIMIENTO FACIAL-------------------------------------------------------------------------/
 		
-// First, we need a video element
+// First, we need a video element (EN PRIMER LUGAR NECESITAMOS UN ELEMENTO DE VIDEO)
 var videoInput = document.createElement('video');
 videoInput.setAttribute('loop','true');
 videoInput.setAttribute('autoplay','true');
@@ -457,7 +479,8 @@ videoInput.setAttribute('width','320');
 videoInput.setAttribute('height','240');
 document.body.appendChild(videoInput);
 
-// messaging stuff
+// messaging stuff (COSAS DE MENSAJERIA)
+//MENSAJES QUE SALEN MIENTRAS DETECTA LA CAMARA
 
 function gUMnCamera() {
   gumSupported = true;
@@ -474,8 +497,9 @@ function gUMnCamera() {
 
 function noGUM() {
   // add messaging
+  //MENSAJES DE CUANDO NO CONSIGUE LA CAMARA
   messages = [
-    "___"
+    "Tu navegador no soporta getUserMedia"
   ];
   
   showHints();
@@ -484,8 +508,9 @@ function noGUM() {
 
 function noCamera() {
   // change messaging
+  // MENSAJES CUANDO LA CAMARA NO FUNCIONA
   messages = [
-    "La Camara No Funciona",
+    "La camara no funciona"
   ];
 
   gumSupported = true;
@@ -496,29 +521,21 @@ function noCamera() {
 function enableStart() {
   document.getElementById('but').className = '';
   
-  // change button to display "start"
-  document.getElementById('start').innerHTML = "Inicio";
+  // change button to display "start" 
+  //EL BOTON DONDE SALEN LOS MENSAJES CAMBIAN PARA COLOCAR INICIO
+  document.getElementById('start').innerHTML = "Jugar";
   
   // add eventlistener to button
+  //AÑADE EL BOTON A LA LISTA DE EVENTOS
   document.getElementById('start').addEventListener('click',start, true);
   
   if (cameraEnabled) {
     messages = ["Rostro Detectado!"];
     messageNow = 0;
     document.getElementById('info').innerHTML = "Rostro Detectado!";
-    
-    /*setTimeout(function() {
-      // change messaging
-      messages = [
-        "fly as fast as possible, avoiding any obstacle",
-        "steer by moving your head",
-        "press ESC while playing to return here",
-        "SPACE = brakes"
-      ];
-    }, 1000);*/
   }
 }
-
+//ESTADO DE LA DETECCTION DE ROSTROS
 document.addEventListener('headtrackrStatus', function(e) {
   switch(e.status) {
     case 'camera found':
@@ -537,63 +554,52 @@ document.addEventListener('headtrackrStatus', function(e) {
 }, false);
 
 // Face detection setup
+//INICIO DE LA DETECCION DEL ROSTRO
 
-var canvasInput = document.createElement('canvas'); // compare
-canvasInput.setAttribute('width','320');
-canvasInput.setAttribute('height','240');
+var canvasInput = document.createElement('canvas'); // compare //COMPARA
 
 var htracker = new headtrackr.Tracker({altVideo : {"ogv" : "/media/facekat/nocamfallback.ogv", "mp4" : "/media/facekat/nocamfallback.mp4"}, smoothing : false, fadeVideo : true, ui : false});
 htracker.init(videoInput, canvasInput);
 htracker.start();
-
+/*Aqui cambio la posicion del cursor que sigue la cara*/
 canvasInput = document.createElement('canvas'); // ident
-canvasInput.setAttribute('width',videoInput.clientWidth);
-canvasInput.setAttribute('height',videoInput.clientHeight);
+canvasInput.setAttribute('width','100');
+canvasInput.setAttribute('height','500');
 document.body.appendChild(canvasInput);
 canvasInput.style.position = 'absolute';
-canvasInput.style.top = '70%';
-canvasInput.style.left = '42%';
+canvasInput.style.top = '120px';
+canvasInput.style.left = '-3%';
 canvasInput.style.zIndex = '1002';
 canvasInput.style.display = 'block';
 var canvasCtx = canvasInput.getContext('2d');
-canvasCtx.strokeStyle = "#000";
-canvasCtx.lineWidth = 2;
+//canvasCtx.strokeStyle = "#999";
+//canvasCtx.lineWidth = 0;
 
-var img = document.getElementById('nave');
+/*Esta funcion dibuja la cruz*/
+var drawIdent = function(cContext,y) {
 
-var drawIdent = function(cContext,x,y) {
-	/* Aqui se debe dibujar la nave o el carrito */
 	// normalise values
-	x = (x/320)*canvasInput.width;
-	y = (y/240)*canvasInput.height;
-
-	// flip horizontally SE PRESUME MUEVE HORIZONTALMENTE 
-	x = canvasInput.width - x;
+	x = (canvasInput.width/2)-10;
+    if (y<6000) {
+    	y1 = 400 - (y/15);
+  	}else{
+    	score = 0;
+    	niveles++;
+  }
 
 	// clean canvas
 	cContext.clearRect(0,0,canvasInput.width,canvasInput.height);
 
-	/* draw rectangle around canvas
+	// draw rectangle around canvas
 	cContext.strokeRect(0,0,canvasInput.width,canvasInput.height);
 
-	//draw marker, from x,y position
-	cContext.beginPath();
-	cContext.moveTo(x-5,y);
-	cContext.lineTo(x+5,y);
-	cContext.closePath();
-	cContext.stroke();
+	// draw marker, from x,y position
 
-	cContext.beginPath();
-	cContext.moveTo(x,y-5);
-	cContext.lineTo(x,y+5);
-	cContext.closePath();
-	cContext.stroke();*/
-	// Imagen, X, Y, ANCHO, ALTO
-	cContext.drawImage(img,x,y,20,20);
+	cContext.drawImage(nave,x,y1,60,80); //Imagen, X, Y, ANCHO, ALTO
 };
 
 document.addEventListener("facetrackingEvent", function(e) {
-	drawIdent(canvasCtx, e.x, e.y);
+	//drawIdent(canvasCtx, e.x, e.y);
 }, false);
 
 document.addEventListener("headtrackingEvent", function(e) {
