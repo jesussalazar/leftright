@@ -243,10 +243,24 @@ function reset() {
 }
 			
 function particleRender(context) {
-	context.beginPath();
-	context.arc( 0, 0, 1, 0,  Math.PI * 2, true );
-	context.fill();
-};
+	/*context.beginPath();
+	context.quadraticCurveTo(10, 80, 40, 130);
+context.quadraticCurveTo(30, 90, 50, 130);
+context.quadraticCurveTo(50, 100, 70, 130);
+context.quadraticCurveTo(80, 110, 100, 130);
+context.quadraticCurveTo(120, 120, 140, 130);
+	//context.arc( 0, 0, 1, 0,  Math.PI * 2, true );
+	context.fillStyle = "gold";
+	context.fill();*/// Create the yellow face
+context.strokeStyle = "#000000";
+context.fillStyle = "#FFFF00";
+context.beginPath();
+context.arc(0,0,1,0,Math.PI*2,true);
+context.closePath();
+context.stroke();
+context.fill();
+
+}
 			
 function init() {
 	resetFont();
