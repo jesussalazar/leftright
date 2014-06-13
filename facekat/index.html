@@ -1,0 +1,401 @@
+<!Left-Right>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="keywords" content="mrflix html5 logo 3d transformation canvas" />
+	<link rel="shortcut icon" type="image/png" href="/img/brick.png"> 
+	<link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="/styles/panel.css">
+    <title>LeftRight: Bienvenido</title>
+	<meta name="viewport" content="width=device-width" />
+    <style type="text/css">
+		* { margin: 0; padding: 0; }
+		html, body { height: 100%; overflow: hidden; background: rgb(30,144,255); font-family: sans-serif; }
+		#background { position: absolute; }
+		#logo { 
+			left: 25%;
+			top: 30%; 
+			margin: -64px 0 0 -51px; 
+			width: 718px; 
+			height: 323px;
+			position: absolute;
+			-webkit-transform-style: preserve-3d;
+			-moz-transform-style: preserve-3d;
+			-o-transform-style: preserve-3d;
+			-ms-transform-style: preserve-3d;
+			transform-style: preserve-3d;
+			-webkit-perspective: 500;
+			-moz-perspective: 500;
+			-o-perspective: 500;
+			-ms-perspective: 500;
+			perspective: 500;
+			-webkit-perspective-origin: 50% 0;
+			-moz-perspective-origin: 50% 0;
+			-o-perspective-origin: 50% 0;
+			-ms-perspective-origin: 50% 0;
+            perspective-origin: 50% 0;
+		}
+
+		#boton
+		{left: 47%;
+		top: 80%;
+		position: absolute;}
+
+		#barra
+		{left: 43%;
+		 top: 75%;
+		 position: absolute;
+		}
+
+@font-face {
+  font-family: 'Erix';
+  font-style: normal;
+  font-weight: normal;
+  src: url('./erix_outline.ttf');
+}
+		#boton
+        {	position:absolute;
+	width: 200%;
+	margin: 0;
+	padding: 0;
+	top:75%;
+	left:40%;
+        }
+
+    #iniciar
+    {
+    color:white;
+	font-family: 'Erix', serif;
+	font-size: 200%;
+	font-style: normal;
+	border-radius:0.3em;
+	border:0.1em solid white;
+	background-color: "#87CEFA";
+	cursor:pointer;
+	padding: 0.5em;
+	margin: 0 auto;
+	width: 8em;
+	height: 2em;
+    }
+
+    .iniciar:hover
+    {
+    	background-color: #DAA520;
+    }
+
+		#hint { display: none; }
+		#logo figure 
+		{
+				width: 718px;
+				height: 323px;
+				display: block;
+				position: absolute;
+				background: url(img/12.png);	
+		}	
+		p { 
+			left: 55%;
+			bottom: 21px;
+			position: absolute;
+			padding: 5px 13px 3px;
+			margin-left: -178px;
+			font-size: 12px;
+			color: #666;
+			background: white;
+			background: rgba(0,0,0,.05);
+			-moz-border-radius: 3px;
+			-webkit-border-radius: 3px;
+			border-radius: 3px;
+			-moz-box-shadow: 1px 1px 0 rgba(0,0,0,0.1);
+			-webkit-box-shadow: 1px 1px 0 rgba(0,0,0,0.1);
+			box-shadow: 1px 1px 0 rgba(0,0,0,0.1);
+		}
+		a, a:visited {
+			color: #f00909;
+			font-weight: bold;
+			text-decoration: none;
+			-webkit-transiton: .1s all linear;
+			-moz-transiton: .2s all linear;
+			-o-transiton: .2s all linear;
+			-ms-transiton: .2s all linear;
+			transiton: .2s all linear;
+		}
+		.cssanimations #logo, .cssanimations #background {
+			-webkit-animation-duration: 7s;
+    		-moz-animation-duration: 8s;
+    		-o-animation-duration: 5s;
+    		-ms-animation-duration: 5s;
+    		animation-duration: 9s;
+			-webkit-animation-iteration-count: infinite;
+			-moz-animation-iteration-count: infinite;
+			-o-animation-iteration-count: infinite;
+			-ms-animation-iteration-count: infinite;
+			animation-iteration-count: infinite;
+			-webkit-animation-timing-function: linear;
+			-moz-animation-timing-function: linear;
+			-o-animation-timing-function: linear;
+			-ms-animation-timing-function: linear;
+			animation-timing-function: linear;
+		}
+		.cssanimations #logo { 
+		    -webkit-animation-name: logo;
+    		-moz-animation-name: logo;
+        	-o-animation-name: logo;
+            -ms-animation-name: logo;
+            animation-name: logo;
+		}
+		.cssanimations #background { 
+		    -webkit-animation-name: sunray;
+    		-moz-animation-name: sunray;
+    		-o-animation-name: sunray;
+    		-ms-animation-name: sunray;
+    		animation-name: sunray;
+		}
+		@-webkit-keyframes sunray {
+			from { -webkit-transform: rotateZ(0) translateZ(-100px); }
+			to { -webkit-transform: rotateZ(-359deg) translateZ(-100px); }
+		}
+		@-moz-keyframes sunray {
+			from { -moz-transform: rotateZ(0) translateZ(-100px); }
+			to { -moz-transform: rotateZ(-359deg) translateZ(-100px); }
+		}
+		@-o-keyframes sunray {
+			from { -o-transform: rotateZ(0) translateZ(-100px); }
+			to { -o-transform: rotateZ(-359deg) translateZ(-100px); }
+		}
+		@-ms-keyframes sunray {
+			from { -ms-transform: rotateZ(0) translateZ(-100px); }
+			to { -ms-transform: rotateZ(-359deg) translateZ(-100px); }
+		}
+		@keyframes sunray {
+			from { transform: rotateZ(0) translateZ(-100px); }
+			to { transform: rotateZ(-359deg) translateZ(-100px); }
+		}
+		@-webkit-keyframes logo {
+			from { -webkit-transform: rotateY(0); }
+			to { -webkit-transform: rotateY(-359deg); }
+		}
+		@-moz-keyframes logo {
+			from { -moz-transform: rotateY(0); }
+			to { -moz-transform: rotateY(-359deg); }
+		}
+		@-o-keyframes logo {
+			from { -o-transform: rotateY(0); }
+			to { -o-transform: rotateY(-359deg); }
+		}
+		@-ms-keyframes logo {
+			from { -ms-transform: rotateY(0); }
+			to { -ms-transform: rotateY(-359deg); }
+		}
+		@keyframes logo {
+			from { transform: rotateY(0); }
+			to { transform: rotateY(-359deg); }
+		}
+		/* Fallback for browsers which don't support 3d transforms */
+		.no-csstransforms3d #logo { width: 128px; height: 145px; margin: -73px 0 0 -64px; background: url(img/logo.png); }
+			.no-csstransforms3d #logo h1 { left: 12px; }
+			.no-csstransforms3d #logo #hint { display: block; left: -93px; top: -85px; width: 331px; height: 32px; text-indent: -9999px; background: url(img/hint.png); position: absolute; }
+			.no-csstransforms3d #logo figure { display: none; }
+	</style>
+	<!-- Piwik -->
+	<script type="text/javascript">
+	var pkBaseURL = (("https:" == document.location.protocol) ? "https://mrflix.de/piwik/" : "http://mrflix.de/piwik/");
+	document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+	</script><script type="text/javascript">
+	try {
+	var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 1);
+	piwikTracker.trackPageView();
+	piwikTracker.enableLinkTracking();
+	} catch( err ) {}
+	</script><noscript><p><img src="http://mrflix.de/piwik/piwik.php?idsite=1" style="border:0" alt="" /></p></noscript>
+	<!-- End Piwik Tracking Tag -->
+
+
+
+
+</head>
+<body>
+	<!audio src=img/88.mp3 autoplay ></audio>
+   
+
+	<canvas id="background">This doesn't work, because your browser doesn't support HTML5.</canvas>
+	<div id="logo">
+		<h1></h1>
+		<div id="hint" title="rotatable in cutting edge browsers">rotatable in cutting edge browsers</div>
+		<figure class="front"></figure>
+	</div>
+
+<!AQUI ESTA EL BOTONO INICIAR>
+	<div id="boton">
+		<form action="index0.html">
+			<button id="iniciar" class="iniciar">Iniciar</button> 
+		</form>
+	</div>
+	<p>
+		         LeftRight - Carlos Avila / Jesus Salazar
+	</p> 
+<script type="text/javascript" src="modernizr-1.6.min.js"></script>
+<script type="text/javascript">
+	var canvas = document.getElementById("background");
+	var bg = canvas.getContext("2d");
+	var dimensions = { x: 0, y: 0 }, diagonal = 0;
+	var mousePos = { x: 0, y: 0 }, startPos = { x: 0, y: 0 }, rotation = 0, pressed = false, _lastFrameTime = new Date().getTime(), _totalTime = 0, _counter = 0;
+	var logo = document.getElementById("logo");
+	var domPrefix = "", browserPrefix = "";
+	var inputDown, inputMove, inputUp;
+	
+	function init(){
+		// get dom- and browserPrefixes for css styles
+		if (typeof(document.body.style.transform) != 'undefined') {
+		} else if (typeof(document.body.style.MozTransform) != 'undefined') {
+			domPrefix = "Moz", browserPrefix = "-moz-";
+		}else if (typeof(document.body.style.webkitTransform) != 'undefined') {
+			domPrefix = "webkit", browserPrefix = "-webkit-";
+		} else if (typeof(document.body.style.OTransform) != 'undefined') {
+			domPrefix = "O", browserPrefix = "-o-";
+		} else if (typeof(document.body.style.msTransform) != 'undefined') {
+			domPrefix = "ms", browserPrefix = "-ms-";
+		} else if (typeof(document.body.style.KhtmlTransform) != 'undefined') {
+			domPrefix = "Khtml", browserPrefix = "-khtml-";
+		}
+		
+		// detect touch for bindings
+		if (Modernizr.touch) {
+			inputDown = "touchstart";
+			inputMove = "touchmove";
+			inputUp = "touchend";
+		}
+		else {
+			inputDown = "mousedown";
+			inputMove = "mousemove";
+			inputUp = "mouseup";
+		}
+		
+		// initiate resize
+		window.addEventListener( "resize", start, false );
+
+		if(Modernizr.csstransforms3d){
+			document.addEventListener( inputDown, mousedownHandler, false );
+			document.addEventListener( inputUp, mouseupHandler, false );
+		}
+		
+		// lets go
+		start();
+		
+		// animation loop
+		if(!Modernizr.cssanimations){
+			setInterval( loop, 1000 / 60 );
+		}
+		if(!Modernizr.csstransforms3d){
+			logo.style[domPrefix+"AnimationName"] = "none";
+		}
+	}
+	
+	function start(){
+		dimensions = { x: document.body.clientWidth, y: document.body.clientHeight };
+		diagonal = Math.round( Math.sqrt( dimensions.x*dimensions.x + dimensions.y*dimensions.y ) );
+		canvas.height = diagonal;
+		canvas.width = diagonal;
+		canvas.style.marginTop = -(diagonal-dimensions.y)/2+"px";
+		canvas.style.marginLeft = -(diagonal-dimensions.x)/2+"px";
+		canvas.style[domPrefix+"TransformOrigin"] = diagonal/2+"px "+diagonal/2+"px";
+		// set canvas center to document center
+		bg.translate(diagonal/2, diagonal/2);
+		var sunray = new star(30, 50, "white");
+		sunray.draw();
+	}
+	
+	function star(spikes, radius, color){
+		this.spikes = spikes;
+		this.radius = radius;
+		this.radiants = 2 * Math.PI/spikes;
+		this.offsetX = radius * Math.cos(this.radiants);
+		this.offsetY = radius * Math.sin(this.radiants);
+		this.starLength = diagonal;
+		this.EndY = this.starLength * Math.tan(this.radiants/2);
+		bg.fillStyle = color;
+	}
+	
+	star.prototype = {
+		draw: function(){
+			bg.clearRect(-this.starLength, -this.starLength, this.starLength*2, this.starLength*2);
+			bg.beginPath();
+			bg.arc(0, 0, this.radius, 0, Math.PI*2,true);
+			bg.fill();
+			for(var i = 0; i<this.spikes; i++){
+				bg.beginPath();
+				bg.moveTo(this.radius,0);
+				bg.lineTo(this.starLength, this.EndY);
+				bg.lineTo(this.offsetX, this.offsetY);
+				bg.fill();
+				bg.rotate(this.radiants);
+			}
+		}
+	}
+	
+	function loop(){
+		var time = new Date().getTime();
+		_counter++;
+		_totalTime += ( time - _lastFrameTime );
+		_lastFrameTime = time;
+		// rotate the sunray
+		canvas.style[domPrefix+"Transform"] = "rotate("+ - --rotation +"deg)";
+		// rotate the logo
+		if( !pressed && Modernizr.csstransforms3d ) {
+			logo.style[domPrefix+"Transform"] = "rotateY("+ rotation +"deg)";
+		}
+	}
+	
+	function turn(){
+		var diffX = mousePos.x - startPos.x;
+		var diffY = mousePos.y - startPos.y;
+		logo.style[domPrefix+"Transform"] = "rotateX("+-diffY+"deg) rotateY("+diffX+"deg)";
+	}
+	
+	function normalizedX(event){
+		return Modernizr.touch ? event.touches[0].pageX : event.pageX;
+	}	
+	
+	function normalizedY(event){
+		return Modernizr.touch ? event.touches[0].pageY : event.pageY;
+	}
+	
+	function mousedownHandler(event){
+		event.preventDefault();
+		startPos.x = normalizedX(event);
+		startPos.y = normalizedY(event);
+		pressed = true;
+		if( Modernizr.cssanimations ) {
+			logo.style[domPrefix+"AnimationName"] = "none";
+		}
+		document.addEventListener( inputMove, mousemoveHandler, false );
+	}
+	
+	function mousemoveHandler(event){
+		event.preventDefault();
+		mousePos.x = normalizedX(event);
+		mousePos.y = normalizedY(event);
+		turn();
+	}
+	
+	function mouseupHandler(event){
+		var approxAngle = Modernizr.cssanimations ? 0 : (rotation - 1000*_counter/_totalTime);
+		logo.style[domPrefix+"Transition"] = browserPrefix+"transform 1s ease-in-out";	
+		logo.style[domPrefix+"Transform"] = "rotateY("+ approxAngle +"deg) rotateX(0)";
+		logo.addEventListener(domPrefix+"TransitionEnd", transitionEnd, false );
+		document.removeEventListener( inputMove, mousemoveHandler, false );
+	}
+	
+	function transitionEnd(){
+		pressed = false;
+		logo.style[domPrefix+"Transition"] = "none";
+		if ( Modernizr.cssanimations ) {
+			logo.style[domPrefix+"AnimationName"] = "logo";
+		}
+		logo.removeEventListener( domPrefix+"TransitionEnd", transitionEnd, false );
+	}
+
+	init();
+</script>
+</body>
+</html>
