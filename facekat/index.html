@@ -37,16 +37,6 @@
             perspective-origin: 50% 0;
 		}
 
-		#boton
-		{left: 47%;
-		top: 80%;
-		position: absolute;}
-
-		#barra
-		{left: 43%;
-		 top: 75%;
-		 position: absolute;
-		}
 
 @font-face {
   font-family: 'Erix';
@@ -54,16 +44,32 @@
   font-weight: normal;
   src: url('./erix_outline.ttf');
 }
-		#boton
+	#button
         {	position:absolute;
 	width: 200%;
 	margin: 0;
 	padding: 0;
-	top:75%;
+	top:70%;
 	left:40%;
         }
 
-    #iniciar
+    #iniciarSpace
+    {
+    color:white;
+	font-family: 'Erix', serif;
+	font-size: 200%;
+	font-style: normal;
+	border-radius:0.3em;
+	border:0.1em solid white;
+	background-color: "#87CEFA";
+	cursor:pointer;
+	padding: 0.5em;
+	margin: 0 auto;
+	width: 8em;
+	height: 2em;
+    }
+
+    #iniciarQuestion
     {
     color:white;
 	font-family: 'Erix', serif;
@@ -226,11 +232,15 @@
 	</div>
 
 <!AQUI ESTA EL BOTONO INICIAR>
-	<div id="boton">
+	<div id="button">
 		<form action="index0.html">
-			<button id="iniciar" class="iniciar">Iniciar</button> 
+			<button id="iniciarSpace" class="iniciar">Juega</button> 
+		</form>
+		<form action="index1.html">
+			<button id="iniciarQuestion" class="iniciar">Aprende</button> 
 		</form>
 	</div>
+
 	<p>
 		         LeftRight - Carlos Avila / Jesus Salazar
 	</p> 
