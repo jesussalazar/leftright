@@ -109,6 +109,7 @@ function titleScreen() {
 	show("start");
 	hide("hiscore");
 	show("title");
+	show("subtitle");
 	show("info");
 	show("lives");
 	hide("credit");
@@ -144,6 +145,7 @@ function start() {
 	show("lives");
 	hide("puntos");
 	show("nivel");
+	show("subtitle")
     
 
 	
@@ -192,6 +194,7 @@ function gameOver() {
 	
 	titleScreen();
 	show("hiscore");
+	show("subtitle")
 }
 
 function initPhase( ph ) {

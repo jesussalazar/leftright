@@ -111,6 +111,18 @@ small {
 	text-align:center;
 	font-size: 200%;
 }
+
+#subtitle {
+	font-family: 'Erix', serif;
+	position:absolute;
+	z-index:999;
+	top:13%;
+	left:20px;
+	width:100%;
+	text-align:center;
+	font-size: 100%;
+	color:#ffffff;
+}
 /*Posicion y atributos de los creditos de la pantalla de inicio*/
 /*Parte inferior*/
 #credit {
