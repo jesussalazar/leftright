@@ -157,7 +157,7 @@ function start() {
 
 	//updateNiveles();
 	
-	maxSpeed = 25;
+	maxSpeed = 15;
 	
 	initPhase( 1 );
 	
@@ -396,14 +396,14 @@ function loop() {
 					lives --;
 					updateLives();
 				}
-				speed = -3;
+				speed = -1.5;
 				collision = 50;
 			}
 		}
 		
 	}
 	
-	speed += 0.009;
+	speed += 0.005;
 	maxSpeed = Math.min(maxSpeed + 0.008 , 150 );
 	
 	if ( speed > maxSpeed ) {
