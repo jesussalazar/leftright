@@ -19,7 +19,7 @@ var niveles=1; //nuevo elemento
 
 var cr,cg,cb;
 
-var options = {"opt_invincible":1 , "opt_swirlonly":0 }; // For debugging purposes MODO DE PRUEBA
+var options = {"opt_invincible":0 , "opt_swirlonly":0 }; // For debugging purposes MODO DE PRUEBA
 
 var lives;
 var collision;
@@ -62,7 +62,7 @@ function handleKey(event) {
 	/*Frenar con la barra espaciadora durante el juego*/
 	if (event.keyCode == 32) {
 		event.preventDefault();
-		speed = 0;
+		speed = 1;
 		score=score-1;
 	}
 }			
