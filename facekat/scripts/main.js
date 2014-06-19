@@ -19,7 +19,7 @@ var niveles=1; //nuevo elemento
 
 var cr,cg,cb;
 
-var options = {"opt_invincible":1 , "opt_swirlonly":0 }; // For debugging purposes MODO DE PRUEBA
+var options = {"opt_invincible":0 , "opt_swirlonly":0 }; // For debugging purposes MODO DE PRUEBA
 
 var lives;
 var collision;
@@ -62,7 +62,7 @@ function handleKey(event) {
 	/*Frenar con la barra espaciadora durante el juego*/
 	if (event.keyCode == 32) {
 		event.preventDefault();
-		speed = 0;
+		speed = 2;
 		score=score-1;
 	}
 }			
@@ -277,7 +277,7 @@ function particleRender(context) {
 	context.strokeStyle = "#FFD700";
 	context.fillStyle = "#00008B";
 	context.beginPath();
-	context.arc(0,0,0.5,0,Math.PI*2,true);
+	context.arc(0,0,0.4,0,Math.PI*2,true);
 	context.stroke();
 	context.fill();
 };
@@ -332,8 +332,8 @@ function loop() {
 		cr = cg = cb = ((speed/30)*0.7)+0.1;
 	} else if ( speed > 30 ) {
 		cr = 1;
-		cg = (40-speed)/10;
-		cb = (40-speed)/10;
+		cg = (40-speed)/20;
+		cb = (40-speed)/20;//aqui
 	}
 	
 	for ( var i = 0; i < STARS; i ++ ) {
@@ -355,11 +355,11 @@ function loop() {
 			switch ( phase ) {
 				case 1:
 					if ( Math.random() < 0.95 ) {
-						particle.position.x = Math.random() * 3000 - 1000;//Aqui se crean las particulas, el radio
-						particle.position.y = Math.random() * 3000 - 1000;
+						particle.position.x = Math.random() * 3000 - 1500;//Aqui se crean las particulas, el radio
+						particle.position.y = Math.random() * 3000 - 1500;
 					} else {
-						particle.position.x = camera.position.x + Math.random() * 400;
-						particle.position.y = camera.position.y + Math.random() * 400;
+						particle.position.x = camera.position.x + Math.random() * 4000;
+						particle.position.y = camera.position.y + Math.random() * 4000;
 					}
 					break;
 					
@@ -397,20 +397,20 @@ function loop() {
 					updateLives();
 				}
 				speed = -1.5;
-				collision = 50;
+				collision = 70;
 			}
 		}
 		
 	}
 	
-	speed += 0.005;
+	speed += 0.02;
 	maxSpeed = Math.min(maxSpeed + 0.008 , 150 );
 	
 	if ( speed > maxSpeed ) {
 		speed = maxSpeed;
 	}
 
-	score += (Math.round(speed/5000)+1);// AQUI DE ACTUALIZA EL PUNTAJE EN LA PANTALLA DE JUEGO
+	score += (Math.round(speed/4000)+1);// AQUI DE ACTUALIZA EL PUNTAJE EN LA PANTALLA DE JUEGO
 	updateNiveles();
 	
 
@@ -584,7 +584,7 @@ var drawIdent = function(cContext,y) {
 	// normalise values
 	x = (canvasInput.width/2)-10;
     if (y<6000) {
-    	y1 = 400 - (y/15);
+    	y1 = 400 - (y/10);
   	}else{
     	score = 0;
     	niveles++;
