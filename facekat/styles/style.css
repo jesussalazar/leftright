@@ -170,6 +170,29 @@ small {
 	font-size:100%;
 	color:#ffffff;
 }
+#inicio {
+	font-family: 'Erix', serif;
+	position:absolute;
+	bottom:1em;
+	top: 90%;
+	left: 10px;
+	width: 80%;
+	text-align:left;
+	font-size:100%;
+	color:#ffffff;
+}
+#meta {
+	font-family: 'Erix', serif;
+	position:absolute;
+	bottom:1em;
+	top: 40%;
+	left: 10px;
+	width: 80%;
+	text-align:left;
+	font-size:100%;
+	color:#ffffff;
+}
+
 /*Color de los creditos (de algunas letras)*/
 #credit a { color: #000000; }
 /*Posicion de la camara en general 

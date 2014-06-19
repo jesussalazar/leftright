@@ -115,6 +115,8 @@ function titleScreen() {
 	hide("credit");
 	hide("puntos");
 	hide("nivel");
+	hide("inicio");
+	hide("meta");
 
 	if (interval != undefined) interval=window.clearInterval(interval);
 	if (hintsTimer != undefined) hintsTimer=window.clearInterval(hintsTimer);
@@ -145,7 +147,9 @@ function start() {
 	show("lives");
 	hide("puntos");
 	show("nivel");
-	show("subtitle")
+	show("subtitle");
+	show("meta");
+	show("inicio");
     
 
 	
@@ -395,6 +399,7 @@ function loop() {
 				if ( collision < 0 ) {
 					lives --;
 					updateLives();
+					score=score-2;
 				}
 				speed = -1.5;
 				collision = 70;
@@ -403,8 +408,8 @@ function loop() {
 		
 	}
 	
-	speed += 0.02;
-	maxSpeed = Math.min(maxSpeed + 0.008 , 150 );
+	speed += 0.01;
+	maxSpeed = Math.min(maxSpeed + 0.0008 , 150 );
 	
 	if ( speed > maxSpeed ) {
 		speed = maxSpeed;
@@ -578,7 +583,7 @@ var canvasCtx = canvasInput.getContext('2d');
 //canvasCtx.strokeStyle = "#999";
 //canvasCtx.lineWidth = 0;
 
-/*Esta funcion dibuja la cruz*/
+/*Esta funcion dibuja la nave*/
 var drawIdent = function(cContext,y) {
 
 	// normalise values
@@ -606,6 +611,6 @@ document.addEventListener("facetrackingEvent", function(e) {
 }, false);
 
 document.addEventListener("headtrackingEvent", function(e) {
-	mouseX = e.x*20;
-	mouseY = -e.y*20;
+	mouseX = e.x*50;
+	mouseY = -e.y*50;
 }, false);
