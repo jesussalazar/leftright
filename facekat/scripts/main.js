@@ -19,7 +19,7 @@ var niveles=1; //nuevo elemento
 
 var cr,cg,cb;
 
-var options = {"opt_invincible":0 , "opt_swirlonly":0 }; // For debugging purposes MODO DE PRUEBA
+var options = {"opt_invincible":1 , "opt_swirlonly":0 }; // For debugging purposes MODO DE PRUEBA
 
 var lives;
 var collision;
@@ -124,7 +124,7 @@ function titleScreen() {
 	animType = "demo";
 	
 	if (gumSupported) {
-	  hintsTimer = setInterval(showHints, 3000);
+	  hintsTimer = setInterval(showHints, 4000);
 	}
 }
 
@@ -150,6 +150,7 @@ function start() {
 	show("subtitle");
 	show("meta");
 	show("inicio");
+	show("niveles");
     
 
 	
@@ -198,7 +199,7 @@ function gameOver() {
 	
 	titleScreen();
 	show("hiscore");
-	show("subtitle")
+	show("subtitle");
 }
 
 function initPhase( ph ) {
@@ -420,6 +421,8 @@ function loop() {
 	
 
 	drawIdent(canvasCtx, score);
+	html("niveles",niveles);//AQUI SE MUESTRAN LOS NIVELES EN LA PANTALLA DE JUAGO
+
 				
 	toNextPhase -= Math.floor(speed);
 	if ( toNextPhase < 0 ) {
@@ -435,7 +438,7 @@ function loop() {
 	}
 
 	//html("score",score); //AQUI SE MUESTRA EL PUNTAJE EN LA PANTALLA DE JUEGO
-	html("niveles",niveles);//AQUI SE MUESTRAN LOS NIVELES EN LA PANTALLA DE JUAGO
+	//html("niveles",niveles);//AQUI SE MUESTRAN LOS NIVELES EN LA PANTALLA DE JUAGO
 	
 	renderer.render( scene, camera );
 //AQUI ES DONDE SE CONFIRMA QUE PERDIO Y PASA A LA PANTALLA GAMEOVER
@@ -589,10 +592,15 @@ var drawIdent = function(cContext,y) {
 	// normalise values
 	x = (canvasInput.width/2)-10;
     if (y<6000) {
-    	y1 = 400 - (y/10);
+    	y1 = 400 - (y/13);
   	}else{
     	score = 0;
     	niveles++;
+
+    	html('nave2', '<img src="nave2.png">')
+    	setTimeout(function()
+        { html('nave2', ''); }
+   			 , 3000);
   }
 
 	// clean canvas
