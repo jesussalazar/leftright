@@ -573,7 +573,7 @@ htracker.start();
 /*Aqui cambio la posicion del cursor que sigue la cara*/
 canvasInput = document.createElement('canvas'); // ident
 canvasInput.setAttribute('width','100');
-canvasInput.setAttribute('height','500');
+canvasInput.setAttribute('height','600');
 document.body.appendChild(canvasInput);
 canvasInput.style.position = 'absolute';
 canvasInput.style.top = '120px';
@@ -588,18 +588,17 @@ var canvasCtx = canvasInput.getContext('2d');
 var drawIdent = function(cContext,y) {
 
 	// normalise values
-	x = (canvasInput.width/2)-10;
-    if (y<1000) {
-    	y1 = 400 - (y/13);
+	x = (canvasInput.width/2)-9;
+    if (y<3380) {
+    	y1 = 600 - (y/5);
   	}else{
-    	score = 0;
     	niveles++;
-
     	html('subirnivel', '<img src="logro.jpg">')
-    	setTimeout(function()
-        { html('subirnivel', ''); }
-   			 , 3000);
-    		speed=0;
+    	
+    	setTimeout(function() { html('subirnivel', ''); }, 3000);
+
+    	speed=0;
+    	score = -250;
   }
 
 	// clean canvas
