@@ -606,9 +606,6 @@ var drawIdent = function(cContext,y) {
 		setTimeout(function() { html('finaljuego', ''); }, 6000);
 		setTimeout(function() { gameOver(); }, 3000);
 		html('finaljuego', '<img src="nave2.png">');
-		setTimeout(function() { html('finaljuego', ''); }, 3000);
-		
-
 	}
 
   }
