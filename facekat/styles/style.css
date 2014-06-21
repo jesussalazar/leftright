@@ -178,6 +178,13 @@ small {
 	width: 100%;
 }
 
+#finaljuego{
+	position:absolute;
+	top: 12%;
+	left: 11%;
+	width: 100%;
+}
+
 /*Color de los creditos (de algunas letras)*/
 #credit a { color: #000000; }
 /*Posicion de la camara en general 

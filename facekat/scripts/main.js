@@ -196,7 +196,7 @@ function gameOver() {
 	}
 	
 	titleScreen();
-	show("hiscore");
+	hide("hiscore");
 	show("subtitle");
 }
 
@@ -421,6 +421,7 @@ function loop() {
 	drawIdent(canvasCtx, score);
 	html("niveles",niveles);//AQUI SE MUESTRAN LOS NIVELES EN LA PANTALLA DE JUAGO
 
+
 				
 	toNextPhase -= Math.floor(speed);
 	if ( toNextPhase < 0 ) {
@@ -597,8 +598,19 @@ var drawIdent = function(cContext,y) {
     	
     	setTimeout(function() { html('subirnivel', ''); }, 6000);
 
-    	speed=0;
+    	speed=-1;
     	score = -310;
+
+    if (niveles=3){
+		html('finaljuego', '<img src="nave2.png">');
+		setTimeout(function() { html('finaljuego', ''); }, 6000);
+		setTimeout(function() { gameOver(); }, 3000);
+		html('finaljuego', '<img src="nave2.png">');
+		setTimeout(function() { html('finaljuego', ''); }, 3000);
+		
+
+	}
+
   }
 
 	// clean canvas
@@ -620,3 +632,4 @@ document.addEventListener("headtrackingEvent", function(e) {
 	mouseX = e.x*50;
 	mouseY = -e.y*50;
 }, false);
+
