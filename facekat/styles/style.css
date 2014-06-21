@@ -171,6 +171,13 @@ small {
 	color:#ffffff;
 }
 
+#subirnivel{
+	position:absolute;
+	top: 10%;
+	left: 40%;
+	width: 80%;
+}
+
 /*Color de los creditos (de algunas letras)*/
 #credit a { color: #000000; }
 /*Posicion de la camara en general 

@@ -107,6 +107,7 @@ function titleScreen() {
 	
 	html("hiscore","hi-score<br>"+hiscore);
 	show("start");
+	show("atras");
 	hide("hiscore");
 	show("title");
 	show("subtitle");
@@ -139,6 +140,7 @@ function animate() {
 en la pantalla de juego */
 function start() {
 	hide("start");
+	hide("atras");
 	hide("hiscore");
 	show("info");
 	hide("credit");
@@ -587,16 +589,17 @@ var drawIdent = function(cContext,y) {
 
 	// normalise values
 	x = (canvasInput.width/2)-10;
-    if (y<6000) {
+    if (y<1000) {
     	y1 = 400 - (y/13);
   	}else{
     	score = 0;
     	niveles++;
 
-    	html('nave2', '<img src="nave2.png">')
+    	html('subirnivel', '<img src="logro.jpg">')
     	setTimeout(function()
-        { html('nave2', ''); }
+        { html('subirnivel', ''); }
    			 , 3000);
+    		speed=0;
   }
 
 	// clean canvas
