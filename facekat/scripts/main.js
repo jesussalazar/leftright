@@ -595,10 +595,10 @@ var drawIdent = function(cContext,y) {
     	niveles++;
     	html('subirnivel', '<img src="logro.jpg">')
     	
-    	setTimeout(function() { html('subirnivel', ''); }, 3000);
+    	setTimeout(function() { html('subirnivel', ''); }, 6000);
 
     	speed=0;
-    	score = -250;
+    	score = -310;
   }
 
 	// clean canvas
