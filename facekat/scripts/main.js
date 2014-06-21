@@ -115,8 +115,6 @@ function titleScreen() {
 	hide("credit");
 	hide("puntos");
 	hide("nivel");
-	hide("inicio");
-	hide("meta");
 
 	if (interval != undefined) interval=window.clearInterval(interval);
 	if (hintsTimer != undefined) hintsTimer=window.clearInterval(hintsTimer);
@@ -148,8 +146,6 @@ function start() {
 	hide("puntos");
 	show("nivel");
 	show("subtitle");
-	show("meta");
-	show("inicio");
 	show("niveles");
     
 
