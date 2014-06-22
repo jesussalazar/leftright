@@ -19,7 +19,7 @@ var niveles=1; //nuevo elemento
 
 var cr,cg,cb;
 
-var options = {"opt_invincible":1 , "opt_swirlonly":0 }; // For debugging purposes MODO DE PRUEBA
+var options = {"opt_invincible":0 , "opt_swirlonly":0 }; // For debugging purposes MODO DE PRUEBA
 
 var lives;
 var collision;
@@ -590,8 +590,8 @@ var drawIdent = function(cContext,y) {
 
 	// normalise values
 	x = (canvasInput.width/2)-9;
-    if (y<3380) {
-    	y1 = 600 - (y/5);
+    if (y<2010) {
+    	y1 = 600 - (y/3);
   	}else{
     	niveles++;
     	html('subirnivel', '<img src="logro.jpg">')
@@ -601,14 +601,9 @@ var drawIdent = function(cContext,y) {
     	speed=-1;
     	score = -310;
 
-    if (niveles=3){
-		html('finaljuego', '<img src="nave2.png">');
-		setTimeout(function() { html('finaljuego', ''); }, 6000);
-		setTimeout(function() { gameOver(); }, 3000);
-		html('finaljuego', '<img src="nave2.png">');
-	}
-
   }
+
+	
 
 	// clean canvas
 	cContext.clearRect(0,0,canvasInput.width,canvasInput.height);
