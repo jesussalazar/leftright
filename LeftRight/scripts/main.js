@@ -586,11 +586,7 @@ canvasInput.style.zIndex = '1002';
 canvasInput.style.display = 'block';
 var canvasCtx = canvasInput.getContext('2d');
 
-var myVar;
 
-function LimpiarReloj() {
-    clearTimeout(myVar);
-}
 
 /*Esta funcion dibuja la nave*/
 var drawIdent = function(cContext,y) {
@@ -604,19 +600,17 @@ var drawIdent = function(cContext,y) {
   	else{
     	niveles++;
     	html('subirnivel', '<img src="logro.jpg">');
-    	//setTimeout(function() { html('subirnivel', ''); }, 6000);
-    	myVar=setTimeout(function() { html('subirnivel', ''); }, 6000);
-    	speeedaux=speed;
-    	speed=-100;
+    	setTimeout(function() { html('subirnivel', ''); }, 6000);
+
+    	speed=-3;
     	score = -310;
   	}
 
   	 if (niveles>2){
   	 	niveles=5;
 
-		html('finaljuego', '<img src="logrofinal.jpg">')
-		myStopFunction(myVar);
-		setTimeout( gameOver(), 7000);	
+		html('finaljuego', '<img src="logrofinal.jpg">');
+		gameOver();
 	}
 
 	// clean canvas
