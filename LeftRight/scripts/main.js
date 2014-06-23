@@ -7,6 +7,7 @@ var PHASELEN = 10000;
 var NPHASES = 6;
 
 var speed;
+var speeedaux;
 var score;
 var phase;
 var toNextPhase;
@@ -17,9 +18,10 @@ var maxSpeed;
 var niveles=1; //nuevo elemento
 
 
+
 var cr,cg,cb;
 
-var options = {"opt_invincible":0 , "opt_swirlonly":0 }; // For debugging purposes MODO DE PRUEBA
+var options = {"opt_invincible":1 , "opt_swirlonly":0 }; // For debugging purposes MODO DE PRUEBA
 
 var lives;
 var collision;
@@ -417,8 +419,9 @@ function loop() {
 	score += (Math.round(speed/4000)+1);// AQUI DE ACTUALIZA EL PUNTAJE EN LA PANTALLA DE JUEGO
 	updateNiveles();
 	
-
+	
 	drawIdent(canvasCtx, score);
+	
 	html("niveles",niveles);//AQUI SE MUESTRAN LOS NIVELES EN LA PANTALLA DE JUAGO
 
 
@@ -582,8 +585,12 @@ canvasInput.style.left = '-3%';
 canvasInput.style.zIndex = '1002';
 canvasInput.style.display = 'block';
 var canvasCtx = canvasInput.getContext('2d');
-//canvasCtx.strokeStyle = "#999";
-//canvasCtx.lineWidth = 0;
+
+var myVar;
+
+function LimpiarReloj() {
+    clearTimeout(myVar);
+}
 
 /*Esta funcion dibuja la nave*/
 var drawIdent = function(cContext,y) {
@@ -592,18 +599,25 @@ var drawIdent = function(cContext,y) {
 	x = (canvasInput.width/2)-9;
     if (y<2010) {
     	y1 = 600 - (y/3);
-  	}else{
+  	}
+
+  	else{
     	niveles++;
-    	html('subirnivel', '<img src="logro.jpg">')
-    	
-    	setTimeout(function() { html('subirnivel', ''); }, 6000);
-
-    	speed=-1;
+    	html('subirnivel', '<img src="logro.jpg">');
+    	//setTimeout(function() { html('subirnivel', ''); }, 6000);
+    	myVar=setTimeout(function() { html('subirnivel', ''); }, 6000);
+    	speeedaux=speed;
+    	speed=-100;
     	score = -310;
+  	}
 
-  }
+  	 if (niveles>2){
+  	 	niveles=5;
 
-	
+		html('finaljuego', '<img src="logrofinal.jpg">')
+		myStopFunction(myVar);
+		setTimeout( gameOver(), 7000);	
+	}
 
 	// clean canvas
 	cContext.clearRect(0,0,canvasInput.width,canvasInput.height);
@@ -614,7 +628,9 @@ var drawIdent = function(cContext,y) {
 	// draw marker, from x,y position
 
 	cContext.drawImage(nave,x,y1,60,80); //Imagen, X, Y, ANCHO, ALTO
+	
 };
+
 
 document.addEventListener("facetrackingEvent", function(e) {
 	//drawIdent(canvasCtx, e.x, e.y);
