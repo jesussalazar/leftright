@@ -21,7 +21,7 @@ var niveles=1; //nuevo elemento
 
 var cr,cg,cb;
 
-var options = {"opt_invincible":1 , "opt_swirlonly":0 }; // For debugging purposes MODO DE PRUEBA
+var options = {"opt_invincible":0 , "opt_swirlonly":0 }; // For debugging purposes MODO DE PRUEBA
 
 var lives;
 var collision;
@@ -606,12 +606,41 @@ var drawIdent = function(cContext,y) {
     	score = -310;
   	}
 
-  	 if (niveles>2){
+  	 if (niveles>5){
   	 	niveles=5;
 
 		html('finaljuego', '<img src="logrofinal.jpg">');
-		gameOver();
+		setTimeout(function() { html('finaljuego', ''); }, 7000);
+
+		setTimeout(function() {	var startext = [];
+								startext[0] = "Vamos Sigue Mejorando Tu Juego ";
+								//startext[1] = "Prueba Otra Vez";
+								//startext[2] = "Prueba Otra Vez";
+								//startext[3] = "Prueba Otra Vez";
+								//startext[4] = "Prueba Otra Vez";
+								bdy.style.backgroundColor = '#000000';
+	
+								html("start",startext[ Math.floor(Math.random() * startext.length) ]);
+	
+								show("start");
+								hide("score");
+								hide("niveles");
+
+
+	
+								hiscore = localStorage.getItem("hiscore");
+								if ( hiscore == 0 || hiscore == undefined || hiscore == null ) hiscore = 0;
+	
+								if ( hiscore < score && options.opt_invincible == 0 ) {
+								hiscore = score;
+								localStorage.setItem("hiscore", hiscore);
+								}
+	
+								titleScreen();
+								hide("hiscore");
+								show("subtitle");}, 7100);
 	}
+	
 
 	// clean canvas
 	cContext.clearRect(0,0,canvasInput.width,canvasInput.height);
