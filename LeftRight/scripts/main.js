@@ -136,7 +136,7 @@ function animate() {
 	demo();
   }
   
-  requestAnimationFrame( animate );//Si quito esta linea elimino todas las animaciones
+  requestAnimationFrame( animate );
 }
 /*Aqui estan las propiedades de todo lo que se muestra
 en la pantalla de juego */
@@ -159,8 +159,6 @@ function start() {
 	
 	reset();
 	updateLives();
-
-	//updateNiveles();
 	
 	maxSpeed = 15;
 	
@@ -187,8 +185,6 @@ function gameOver() {
 	hide("score");
 	hide("niveles");
 
-
-	
 	hiscore = localStorage.getItem("hiscore");
 	if ( hiscore == 0 || hiscore == undefined || hiscore == null ) hiscore = 0;
 	
