@@ -53,6 +53,13 @@
 	left:28%;
         }
 
+     #acerca
+     {
+    position:absolute;
+	top:92%;
+	left:46%;
+	 }
+
     #iniciarSpace
     {
     color:white;
@@ -87,6 +94,21 @@
 	height: 2em;
 	float: left;
     }
+
+#AcercaDe
+    {
+	background-color: "#87CEFA";
+	cursor:pointer;
+	padding: 0.5em;
+	margin: 0 auto;
+	width: 120px;
+	height: 25px;
+	position: absolute;
+	top: 75%;
+	left: 45%;
+    }
+
+
 
     .iniciar:hover
     {
@@ -244,9 +266,12 @@
 		</form>
 	</div>
 
-	<p>
-		         LeftRight - Carlos Avila / Jesus Salazar
-	</p> 
+	<div id="acerca">
+    	<form action="index0.html">
+    		<button id="AcercaDe" class="iniciar">¿Quienes Somos?</button> 
+		</form>
+	</div>
+
 <script type="text/javascript" src="modernizr-1.6.min.js"></script>
 <script type="text/javascript">
 	var canvas = document.getElementById("background");
